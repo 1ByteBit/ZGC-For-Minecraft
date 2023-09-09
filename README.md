@@ -21,45 +21,34 @@ Overall, it's best to not change these flags unless you know exactly what you're
 - A "+" means that flag is being specifically enabled, while a "-" means that flag is being specifically disabled.
 
 ### Reasoning for each flag:
--Xms and -Xmx are matching as it prevents any performance issues from occuring due to requesting additional memory from the OS and lessens the amount of work the GC has to do before getting additional memory.
 
--XX:+UnlockExperimentalVMOptions - is required for many of the other flags.
-
--XX:+UseZGC - Enables ZGC
-
--XX:+DisableExplicitGC - Prevents plugins and other code from messing with the GC.
-
--XX:+AlwaysPreTouch - Sets up and reserves the memory upon startup. Improves efficiency and access speed.
-
--XX:+PerfDisableSharedMem - Prevents the GC from writing to file system, reducing the amount of lag due to I/O. See [here](https://www.evanjones.ca/jvm-mmap-pause.html)
-
--XX:-ZUncommit - Prevents ZGC from uncommiting memory and returning it to the OS.
-
--XX:+ParallelRefProcEnabled - In Aikars words: "Optimizes the GC process to use multiple threads for weak reference checking. Not sure why this isn't default..."
+| Flag | Reason
+|--------------|-------------|
+| -Xms and -Xmx matching | It prevents any performance issues from occuring due to requesting additional memory from the OS and lessens the amount of work the GC has to do before getting additional memory.
+| -XX:+UnlockExperimentalVMOptions | Is required for many of the other flags.
+| -XX:+UseZGC | Enables ZGC
+| -XX:+DisableExplicitGC | Prevents plugins and other code from messing with the GC.
+| -XX:+AlwaysPreTouch | Sets up and reserves the memory upon startup. Improves efficiency and access speed.
+| -XX:+PerfDisableSharedMem | Prevents the GC from writing to file system, reducing the amount of lag due to I/O. See [here](https://www.evanjones.ca/jvm-mmap-pause.html)
+| -XX:-ZUncommit | Prevents ZGC from uncommiting memory and returning it to the OS.
+| -XX:+ParallelRefProcEnabled | In Aikars words: "Optimizes the GC process to use multiple threads for weak reference checking. Not sure why this isn't default..."
 
 ## Other usable flags for ZGC:
 
 See [here](https://www.oracle.com/java/technologies/javase/vmoptions-jsp.html) for most generic flags.
 
--XX:+UseLargePages - Literally just improves performance with no downsides. Requires some setup however
-
--XX:+UseTransparentHugePages - In Aikars words: "Controversial feature but may be usable if you can not configure your host for real HugeTLBFS. We have not measured how THP works for MC or its impact with AlwaysPreTouch, so this section is for the advanced users who want to experiment."
-
--XX:ConcGCThreads - The amount of threads for the GC to use. Dynamically set by default
-
--XX:ZAllocationSpikeTolerance - ZGC's allocation spike tolerance, the default value is 2. The bigger the value, the higher allocation rate.
-
--XX:ZCollectionInterval - This is the minimum time interval for ZGC to occur in seconds. Default is 0
-
--XX:ZFragmentationLimit - If the current region fragmentation is greater than this value, the region will be reclaimed (default is 25).
-
--XX:ZMarkStackSpaceLimit - Specifies the maximum number of bytes allocated for the mark stack. Default is 8589934592 (8096M).
-
--XX:ZProactive - Whether to enable active recycling. Set to true by default
-
--XX:UseNUMA - Enabled NUMA support. Automatically set according to the machine by default. Use this flag to force it to be enabled/disabled. 
-
--XX:ZUncommitDelay - Sets the amount of time (in seconds) that heap memory must have been idle before being uncommitted (ZUncommit must be enabled). Default is 300
+| Flag | Reason
+| --------------|-------------|
+| -XX:+UseLargePages | Literally just improves performance with no downsides. Requires some setup however
+| -XX:+UseTransparentHugePages | In Aikars words: "Controversial feature but may be usable if you can not configure your host for real HugeTLBFS. We have not measured how THP works for MC or its impact with AlwaysPreTouch, so this section is for the advanced users who want to experiment."
+| -XX:ConcGCThreads | The amount of threads for the GC to use. Dynamically set by default
+| -XX:ZAllocationSpikeTolerance | ZGC's allocation spike tolerance, the default value is 2. The bigger the value, the higher allocation rate.
+| -XX:ZCollectionInterval | This is the minimum time interval for ZGC to occur in seconds. Default is 0
+| -XX:ZFragmentationLimit | If the current region fragmentation is greater than this value, the region will be reclaimed (default is 25).
+| -XX:ZMarkStackSpaceLimit | Specifies the maximum number of bytes allocated for the mark stack. Default is 8589934592 (8096M).
+| -XX:ZProactive | Whether to enable active recycling. Set to true by default
+| -XX:UseNUMA | Enabled NUMA support. Automatically set according to the machine by default. Use this flag to force it to be enabled/disabled. 
+| -XX:ZUncommitDelay | Sets the amount of time (in seconds) that heap memory must have been idle before being uncommitted (ZUncommit must be enabled). Default is 300
 
 ## Main Sources:
 [Purpur Discord](https://discord.gg/purpurmc-685683385313919172)
