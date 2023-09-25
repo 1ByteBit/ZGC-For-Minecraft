@@ -61,5 +61,5 @@ See [here](https://www.oracle.com/java/technologies/javase/vmoptions-jsp.html) f
 
 [Dev.java](https://dev.java/learn/jvm/tool/garbage-collection/zgc-overview/)
 
-# Note:
+### Note:
 There is a newer version of ZGC which is generational, just like G1GC (The default GC for Minecraft). It may require more tweaking to ensure stability, and I have yet to do proper testing so I'm not able to provide any information involving it, but if you wish to try it simply add "-XX:+ZGenerational" into the flags, after "-XX:+UseZGC"
