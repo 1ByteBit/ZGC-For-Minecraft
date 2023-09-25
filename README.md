@@ -10,7 +10,7 @@ So in other words, only bigger servers should be using ZGC.
 ``java -Xms8G -Xmx8G -XX:+UnlockExperimentalVMOptions -XX:+UseZGC -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:+PerfDisableSharedMem -XX:-ZUncommit -XX:+ParallelRefProcEnabled -jar server.jar --nogui``
 
 Please keep in mind that using other flags will either:
-1. Increase general CPU usage and provide minimal GC performance gains
+1. Increase general CPU usage and provide minimal GC performance gains.
 2. Lower general CPU usage but have the possibility of the GC being overwhelmed.
 
 Overall, it's best to not change these flags unless you know exactly what you're doing and have a specific reason for changing them. The only known exception to this would be the -XX:+UseLargePages flag, which was not included due it needing some setup beforehand.
@@ -60,3 +60,6 @@ See [here](https://www.oracle.com/java/technologies/javase/vmoptions-jsp.html) f
 [OpenJDK Wiki](https://wiki.openjdk.org/display/zgc/Main)
 
 [Dev.java](https://dev.java/learn/jvm/tool/garbage-collection/zgc-overview/)
+
+# Note:
+There is a newer version of ZGC which is generational, just like G1GC (The default GC for Minecraft). It may require more tweaking to ensure stability, and I have yet to do proper testing so I'm not able to provide any information involving it, but if you wish to try it simply add "-XX:+ZGenerational" into the flags, after "-XX:+UseZGC"
