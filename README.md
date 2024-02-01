@@ -1,4 +1,6 @@
 # ZGC For Minecraft
+# Please note the following:
+Changing the GC is a HIGHLY technical thing. There have been numerous reports of people using this due to it "being better" or something similar. Using ZGC is not as simple as using or not using Aikars flags, there may be issues, and it may not be better in your use case. Please only use these flags if you know what you're doing and are able to handle technical issues.
 ## Preface
 Be warned that it's commonly taken that ZGC must be finely tuned to the machine you're using. While this can be true for java versions below 17, any such settings are now dynamic, and therefore shouldn't need to be configured.
 ## What is ZGC?
